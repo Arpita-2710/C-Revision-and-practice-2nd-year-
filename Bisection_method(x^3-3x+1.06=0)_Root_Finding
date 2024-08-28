@@ -1,4 +1,4 @@
-//Write a C program to find the positive root of the equation x^3-3x+1.06=0 by the method of bisection correct to 3 decimal places.
+//Write a C program to find the positive root of the equation x^3-3x+1.06=0 by the method of bisection correct to 3 decimal places and print the function value for the root.
 #include <stdio.h>
 #include <math.h>
 
@@ -54,6 +54,6 @@ int main() {
 
     // The root is approximately at c
     printf("The root of the equation is: %.3lf\n", c);
-
+    printf("The value of the function in the given root:%d\n",f(c));
     return 0;
 }
