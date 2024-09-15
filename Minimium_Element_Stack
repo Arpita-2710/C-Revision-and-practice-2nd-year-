@@ -1,0 +1,108 @@
+//Write a C program to find the minimum element in a stack.
+//Expected Output:
+//Current stack elements:
+//9 2 4 2 4
+//Minimum element: 2
+//After removing two elements:
+//Current stack elements:
+//9 2 4
+//Minimum element: 2
+//After adding one element:
+//Current stack elements:
+//9 2 4 1
+//Minimum element: 1
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+// Stack structure
+typedef struct Stack {
+    int arr[MAX_SIZE];
+    int top;
+} Stack;
+
+// Initialize an empty stack
+void initialize(Stack* stack)
+{
+    stack->top = -1;
+}
+
+// Push an element onto the stack
+void push(Stack* stack, int value)
+{
+    if (stack->top == MAX_SIZE - 1) {
+        printf("Stack overflow!\n");
+        exit(1);
+    }
+    stack->arr[++stack->top] = value;
+}
+
+// Pop an element from the stack
+int pop(Stack* stack)
+{
+    if (stack->top == -1) {
+        printf("Stack underflow!\n");
+        exit(1);
+    }
+    return stack->arr[stack->top--];
+}
+
+// Find the minimum element in the stack
+int findMin(Stack* stack)
+{
+    int min = stack->arr[0];
+    for (int i = 1; i <= stack->top; i++) {
+        if (stack->arr[i] < min)
+            min = stack->arr[i];
+    }
+    return min;
+}
+
+// Print the stack elements
+void printStack(Stack* stack)
+{
+    printf("Current stack elements: ");
+    for (int i = 0; i <= stack->top; i++)
+        printf("%d ", stack->arr[i]);
+    printf("\n");
+}
+
+int main()
+{
+    Stack myStack;
+    initialize(&myStack);
+
+    // Push elements onto the stack
+    push(&myStack, 9);
+    push(&myStack, 2);
+    push(&myStack, 4);
+    push(&myStack, 2);
+    push(&myStack, 4);
+
+    // Print the stack elements and find the minimum element
+    printStack(&myStack);
+    printf("Minimum element: %d\n", findMin(&myStack));
+
+    // Pop two elements from the stack
+    printf("After removing two elements:\n");
+    pop(&myStack);
+    pop(&myStack);
+
+    // Print the stack elements and find the minimum element
+    printStack(&myStack);
+    printf("Minimum element: %d\n", findMin(&myStack));
+
+    // Push one element onto the stack
+    printf("After adding one element:\n");
+    push(&myStack, 1);
+
+    // Print the stack elements and find the minimum element
+    printStack(&myStack);
+    printf("Minimum element: %d\n", findMin(&myStack));
+
+    return 0;
+}
